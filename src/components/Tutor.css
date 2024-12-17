@@ -1,0 +1,152 @@
+/* Container Styles */
+.tutor-profile-container {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+/* Header Section */
+.headers {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  background-color: #fff;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.logo img {
+  height: 50px;
+  width: auto;
+  border-radius: 8px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.header-icons {
+  display: flex;
+  gap: 10px;
+}
+
+.header-icons i {
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+}
+
+/* Profile Card Section */
+.profile-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px auto;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+}
+
+.profile-picture {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.profile-initials {
+  width: 80px;
+  height: 80px;
+  background: #cccccc;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+  margin: 0 auto;
+}
+
+.personal-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.personal-info h2 {
+  font-size: 18px;
+  margin-bottom: 15px;
+  color: #333;
+  text-align: center;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #555;
+}
+
+.info-row strong {
+  color: #333;
+}
+
+.info-row p {
+  margin: 0;
+}
+
+/* Info Cards Section */
+.info-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.info-card {
+  background: #ffebee;
+  border-radius: 8px;
+  padding: 15px;
+  text-align: center;
+  font-weight: bold;
+  color: #d32f2f;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Role Section */
+.role-section {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.role-section h2 {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.role-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.role-btn {
+  width: 80%;
+  padding: 10px 15px;
+  background: #ffc002;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.role-btn:hover {
+  background: #ffd966;
+}

@@ -1,0 +1,18 @@
+.cutoff-container {
+    padding: 1.5rem;
+  }
+  
+  .cutoff-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  
+  .cutoff-card {
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  

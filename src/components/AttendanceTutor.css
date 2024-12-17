@@ -1,0 +1,160 @@
+/* General Page Styles */
+.attendance-page {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
+  
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #eceeef;
+    color: #fff;
+  }
+  
+  .logo {
+    height: 50px;
+  }
+  
+  .title {
+    font-size: 24px;
+    margin: 0;
+  }
+  
+  /* Search Section */
+  .search-section {
+    margin: 20px 0;
+    display: flex;
+    gap: 10px;
+  }
+  
+  .date-input {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .search-btn {
+    padding: 8px 16px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .search-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  /* File Upload Section */
+  .upload-input {
+    padding: 8px;
+    font-size: 16px;
+  }
+  
+  .upload-btn {
+    padding: 8px 16px;
+    font-size: 16px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .upload-btn:hover {
+    background-color: #218838;
+  }
+  
+  /* Attendance Table */
+  .attendance-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .attendance-table th,
+  .attendance-table td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+  }
+  
+  .attendance-table th {
+    background-color: #f4af00;
+    color: #fff;
+  }
+  
+  .attendance-table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .details-btn {
+    padding: 6px 12px;
+    font-size: 14px;
+    background-color: #ffc107;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .details-btn:hover {
+    background-color: #e0a800;
+  }
+  
+  /* Details Row */
+  .details-row {
+    background-color: #f4f4f4;
+  }
+  
+  .details-container {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+  }
+  
+  .details-text p {
+    margin: 5px 0;
+  }
+  
+  .details-container button {
+    padding: 6px 12px;
+    font-size: 14px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .details-container button:hover {
+    background-color: #218838;
+  }
+  
+  /* Download Button */
+  .download-section {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .download-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .download-btn:hover {
+    background-color: #0056b3;
+  }

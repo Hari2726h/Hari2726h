@@ -1,0 +1,225 @@
+/* AdminDashboard.css */
+
+.dashboard-container {
+    display: flex;
+}
+
+.top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+}
+
+.logo-image {
+    width: 50px;
+    height: auto;
+    margin-right: 20px;
+}
+
+.management-section {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+.search-input {
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.header-icons-container {
+    display: flex;
+    align-items: center;
+}
+
+.icon-item {
+    margin-right: 20px;
+}
+
+.profile-dropdown-container {
+    display: flex;
+    align-items: center;
+}
+
+.profile-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.sidebar-navigation {
+    width: 250px;
+    background-color: #f4f4f4;
+    padding-top: 50px;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-navigation ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar-navigation li {
+    padding: 15px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.sidebar-navigation li:hover {
+    background-color: #ddd;
+}
+
+.main-area {
+    margin-left: 270px;
+    padding: 20px;
+    flex-grow: 1;
+    margin-top: 80px;
+}
+
+.tab-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.tab-container button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.tab-container .active-tab-button {
+    background-color: #333;
+    color: white;
+}
+
+.section-container {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.add-button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.add-button:hover {
+    background-color: #45a049;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.data-table th,
+.data-table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.edit-button,
+.delete-button {
+    padding: 5px 10px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.edit-button {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.edit-button:hover {
+    background-color: #45a049;
+}
+
+.delete-button {
+    background-color: #f44336;
+    color: white;
+}
+
+.delete-button:hover {
+    background-color: #d32f2f;
+}
+
+.modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content-container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    width: 400px;
+}
+
+.modal-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-form label {
+    margin: 10px 0 5px;
+}
+
+.modal-form input {
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.modal-form button {
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+}
+
+.modal-form button[type="button"] {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.modal-form button[type="button"]:hover {
+    background-color: #45a049;
+}
+
+.modal-form button[type="button"]:nth-child(2) {
+    background-color: #f44336;
+    color: white;
+}
+
+.modal-form button[type="button"]:nth-child(2):hover {
+    background-color: #d32f2f;
+}

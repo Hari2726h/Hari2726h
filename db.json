@@ -1,0 +1,190 @@
+{
+  "students": [
+    {
+      "id": "1",
+      "email": "alice@student.com",
+      "password": "student123",
+      "name": "Alice Johnson",
+      "class": "10A",
+      "contact": "1234567890",
+      "address": "123 Main St, Springfield",
+      "gender": "Female",
+      "age": 16,
+      "familyDetails": {
+        "fatherName": "John Johnson",
+        "motherName": "Emily ",
+        "guardianContact": "1234567890"
+      },
+      "cutoff": 85
+    },
+    {
+      "id": "2",
+      "email": "bob@student.com",
+      "password": "student456",
+      "name": "Bob Smith",
+      "class": "10B",
+      "contact": "0987654321",
+      "address": "456 Elm St, Springfield",
+      "gender": "Male",
+      "age": 17,
+      "familyDetails": {
+        "fatherName": "Robert Smith",
+        "motherName": "Anna Smith",
+        "guardianContact": "0987654321"
+      },
+      "cutoff": 80
+    },
+    {
+      "id": "3",
+      "name": "HARIPRASATH",
+      "email": "7272823tucs105@skct.edu.in",
+      "password": "student456",
+      "grade": "3",
+      "contact": "3456789",
+      "address": "-",
+      "gender": "-",
+      "age": "18",
+      "familyDetails": {
+        "fatherName": "-",
+        "motherName": "-",
+        "guardianContact": "-"
+      },
+      "cutoff": "-",
+      "class": "II Year"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "email": "admin@example.com",
+      "password": "admin123",
+      "role": "admin"
+    }
+  ],
+  "tutors": [
+    {
+      "id": "1",
+      "email": "gayathri@tutor.com",
+      "password": "tutor123",
+      "name": "Gayathri R",
+      "college": "Sri Krishna College of Technology",
+      "contact": "123456781",
+      "address": "Coimbatore",
+      "dob": "24/01/2004",
+      "graduationYear": "2020-2024",
+      "parentContact": "0987654321",
+      "gender": "Female",
+      "designation": "Senior Maths Tutor",
+      "subject": "Mathematics",
+      "grade": "",
+      "age": "-",
+      "familyDetails": {
+        "fatherName": "-",
+        "motherName": "-",
+        "guardianContact": "-"
+      },
+      "cutoff": "-"
+    },
+    {
+      "id": "2",
+      "email": "jane@tutor.com",
+      "password": "physics456",
+      "name": "Jane Smith",
+      "college": "Sri Krishna College of Technology",
+      "contact": "1234567890",
+      "address": "Coimbatore",
+      "dob": "24/01/2004",
+      "graduationYear": "2020-2024",
+      "parentContact": "",
+      "gender": "Female",
+      "designation": "Anchor"
+    }
+  ],
+  "anchors": [
+    {
+      "id": "1",
+      "name": "John Doe",
+      "subject": "Math",
+      "contact": "9876543210"
+    },
+    {
+      "id": "2",
+      "name": "Jane Smith",
+      "subject": "Science",
+      "contact": "8765432109"
+    }
+  ],
+  "attendance": [
+    {
+      "id": "1734275436891",
+      "Student ID": "1",
+      "Date": "2024-12-01",
+      "Status": "Present",
+      "Meeting": "Inter College meeting",
+      "Hours Present": 1
+    },
+    {
+      "id": "1734275436892",
+      "Student ID": "2",
+      "Date": "2024-12-01",
+      "Status": "Absent",
+      "Meeting": "Inter College meeting",
+      "Hours Present": 0.45
+    },
+    {
+      "id": "1734275436893",
+      "Student ID": "3",
+      "Date": "2024-12-01",
+      "Status": "Present",
+      "Meeting": "Inter College meeting",
+      "Hours Present": "-"
+    },
+    {
+      "id": 1734444706070,
+      "Student ID": "1",
+      "Date": "2024-12-01",
+      "Status": "Present",
+      "Meeting": "Student anchor meeting",
+      "Hours Present": 1
+    },
+    {
+      "id": 1734444706071,
+      "Student ID": 4,
+      "Date": "2024-12-01",
+      "Status": "Absent",
+      "Meeting": "Inter College meeting",
+      "Hours Present": 0.45
+    },
+    {
+      "id": 1734444706072,
+      "Student ID": 5,
+      "Date": "2024-12-01",
+      "Status": "Present",
+      "Meeting": "Inter College meeting",
+      "Hours Present": "-"
+    }
+  ],
+  "marks": [
+    {
+      "id": "1734238687765",
+      "studentId": "1",
+      "date": "Alice Johnson",
+      "status": 85,
+      "uploadedByTutorId": 1
+    },
+    {
+      "id": "1734238687766",
+      "studentId": "2",
+      "date": "Bob Smith",
+      "status": 45,
+      "uploadedByTutorId": 1
+    },
+    {
+      "id": "1734238687767",
+      "studentId": "3",
+      "date": "Sam Wilson",
+      "status": 72,
+      "uploadedByTutorId": 1
+    }
+  ]
+}

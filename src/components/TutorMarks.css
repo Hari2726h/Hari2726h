@@ -1,0 +1,185 @@
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+  }
+  
+  .app {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Header Section */
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #ebedf0;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 10px;
+  }
+  
+  .logo img {
+    height: 50px;
+    width: auto;
+  }
+  
+  .headline {
+    flex-grow: 1;
+    text-align: center;
+    margin: 0;
+    font-size: 1.5rem;
+  }
+  
+  /* Dropdown and Input Sections */
+  .assign-section,
+  .upload-section,
+  .search-section,
+  .add-student-section {
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  
+  .assign-section label,
+  .add-student-section h3 {
+    font-weight: bold;
+  }
+  
+  input,
+  select {
+    padding: 8px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+  }
+  
+  input[type="file"] {
+    border: none;
+  }
+  
+  input:focus,
+  select:focus {
+    border-color: #004080;
+  }
+  
+  /* Table Section */
+  .students-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+  }
+  
+  .students-table th,
+  .students-table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .students-table th {
+    background-color: #f5ba0a;
+    color: white;
+  }
+  
+  .students-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .students-table input {
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+  }
+  
+  /* Add New Student Section - Row Wise */
+  .add-student-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: flex-start;
+  }
+  
+  .add-student-section input,
+  .add-student-section select {
+    width: 200px;
+    max-width: 200px;
+    margin-bottom: 10px;
+  }
+  
+  .add-student-section h3 {
+    font-size: 1.2rem;
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  
+  /* Buttons */
+  .action-buttons {
+    display: flex;
+    justify-content: flex-start;
+    gap: 15px;
+  }
+  
+  button {
+    padding: 10px 15px;
+    font-size: 1rem;
+    color: white;
+    background-color: #dca80e;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #ffbf00;
+  }
+  .header-icons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  
+  .header-icons i {
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
+  }
+  button:active {
+    background-color: #001f3d;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .header {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .assign-section,
+    .upload-section,
+    .search-section {
+      flex-direction: column;
+      gap: 15px;
+    }
+  
+    .headline {
+      margin: 10px 0;
+    }
+  
+    .add-student-section input,
+    .add-student-section select {
+      width: 100%;
+      max-width: 100%;
+    }
+  }

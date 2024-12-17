@@ -1,0 +1,182 @@
+/* Overall Layout */
+.dashboard-container {
+  display: flex;
+  height: 100vh; /* Adjusted height to standard viewport */
+  max-width: 95%; /* Set a max width */
+  margin: 0 auto; /* Center the layout */
+  background-color: #f9f9f9;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 220px; /* Reduced width */
+  background-color: #ffe4a1;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sidebar-logo {
+  width: 180px; /* Reduced logo width */
+  margin-bottom: 1.5rem; /* Adjust spacing */
+}
+
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  padding: 8px; /* Reduced padding */
+  margin-bottom: 8px; /* Adjusted spacing */
+  font-size: 1rem; /* Slightly smaller text */
+  color: #333;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.sidebar-item:hover {
+  background-color: #ffd966;
+}
+
+.sidebar-item i {
+  margin-right: 8px; /* Reduced margin */
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  padding: 1.5rem; /* Reduced padding */
+}
+
+/* Header */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #e3f2fd;
+  padding: 0.8rem; /* Reduced padding */
+  border-radius: 8px; /* Slightly smaller border radius */
+  margin-bottom: 1.5rem;
+}
+
+.dashboard-header h2 {
+  margin: 0;
+  font-size: 1.4rem; /* Adjusted font size */
+  color: #333;
+}
+
+.dashboard-header p {
+  padding-left: 8px; /* Adjusted padding */
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.header-icons i {
+  font-size: 1.4rem; /* Slightly smaller icons */
+  color: #555;
+  margin-left: 15px; /* Reduced margin */
+  cursor: pointer;
+}
+
+/* Performance Sections */
+.performance-sections {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem; /* Reduced gap */
+  margin-bottom: 1.5rem;
+}
+
+.card {
+  flex: 1;
+  background-color: white;
+  border-radius: 8px; /* Smaller radius */
+  padding: 0.8rem; /* Reduced padding */
+  text-align: center;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card h3 {
+  margin-bottom: 0.8rem; /* Reduced margin */
+  color: #333;
+}
+
+.card-image {
+  width: 100%;
+  height: auto;
+}
+
+/* Details Section */
+.details-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* Reduced gap */
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.2rem; /* Adjusted gap */
+}
+
+.details-card {
+  background-color: #f5c41c;
+  color: white;
+  text-align: center;
+  padding: 12px 18px; /* Adjusted padding */
+  border-radius: 8px; /* Reduced radius */
+  cursor: pointer;
+  font-size: 0.95rem; /* Slightly smaller font size */
+  font-weight: bold;
+  transition: transform 0.3s, background-color 0.3s;
+}
+
+.details-card:hover {
+  background-color: #e0b015;
+  transform: translateY(-5px);
+}
+
+/* Information Grid */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.8rem; /* Reduced gap */
+}
+
+.info-card {
+  background-color: white;
+  border-radius: 8px; /* Reduced radius */
+  padding: 0.8rem; /* Reduced padding */
+  text-align: center;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  font-size: 1rem; /* Adjusted font size */
+  color: #333;
+  transition: transform 0.3s;
+}
+
+.info-card:hover {
+  transform: translateY(-5px);
+}
+
+.sidebar-menu img {
+  width: 30px; /* Reduced size */
+  height: 30px;
+  margin-right: 8px; /* Adjusted spacing */
+}
+
+.header-icons {
+  display: flex;
+  align-items: center;
+}
+
+.header-icons img {
+  width: 25px; /* Reduced size */
+  height: 25px;
+  margin-left: 15px; /* Adjusted spacing */
+  cursor: pointer;
+}

@@ -1,0 +1,96 @@
+/* General styling for the login page */
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f9f9f9;
+  }
+  
+  .login-container {
+    width: 400px;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  /* Logo section */
+  .logo-section .login-logo {
+    width: 300px;
+    margin-bottom: 20px;
+  }
+  
+  /* Login Form */
+  .login-form h2 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    color: #333;
+  }
+  
+  .login-input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+  
+  .login-options {
+    text-align: right;
+  }
+  
+  .forgot-password-link {
+    font-size: 0.9rem;
+    color: #666;
+    text-decoration: none;
+  }
+  
+  .forgot-password-link:hover {
+    text-decoration: underline;
+  }
+  
+  .login-button {
+    width: 100%;
+    padding: 10px;
+    margin: 20px 0;
+    background-color: #f5c41c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .login-button:hover {
+    background-color: #e0b015;
+  }
+  
+  /* Google Login */
+  .google-login {
+    margin-top: 20px;
+  }
+  
+  .google-login-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: white;
+    cursor: pointer;
+  }
+  
+  .google-login-button:hover {
+    background-color: #f9f9f9;
+  }
+  
+  .google-icon {
+    width: 20px;
+    margin-right: 10px;
+  }
+  

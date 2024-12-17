@@ -1,0 +1,72 @@
+/* General styling for the logout page */
+.logout-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f9f9f9;
+  }
+  
+  /* Logout box container */
+  .logout-box {
+    width: 350px;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  /* Title for logout confirmation */
+  .logout-box h2 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    color: #333;
+  }
+  
+  /* Logout button styling */
+  .logout-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #f5c41c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
+  
+  .logout-button:hover {
+    background-color: #e0b015;
+  }
+  
+  /* Optional "Cancel" button if you want to provide a cancel action */
+  .cancel-button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    background-color: #ddd;
+    color: #333;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .cancel-button:hover {
+    background-color: #bbb;
+  }
+  
+  /* Styling for text in case the user changes their mind */
+  .cancel-link {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #666;
+    text-decoration: none;
+  }
+  
+  .cancel-link:hover {
+    text-decoration: underline;
+  }
+  
