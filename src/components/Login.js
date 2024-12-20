@@ -11,7 +11,7 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { role } = location.state || {};
-  axios.defaults.baseURL = 'https://json-server-backend-6y18.onrender.com';
+  axios.defaults.baseURL = 'https://your-backend.cyclic.app';
 
   useEffect(() => {
     // Block back navigation and redirect to logout page
@@ -30,14 +30,13 @@ const Login = () => {
     };
   }, [navigate]);
 
-  axios.defaults.baseURL = 'https://json-server-backend-6y18.onrender.com';
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let endpoint = role === "student" ? "students" : role === "tutor" ? "tutors" : "users";
+    const endpoint = role === "student" ? "students" : role === "tutor" ? "tutors" : "users";
+    const apiUrl = `http://localhost:5000/${endpoint}`;
   
     try {
-      const response = await axios.get(`/${endpoint}`);
+      const response = await axios.get(apiUrl);
       const validUser = response.data.find(
         (user) => user.email === email && user.password === password
       );
@@ -48,7 +47,7 @@ const Login = () => {
           navigate("/dashboard");
         } else if (role === "tutor") {
           localStorage.setItem("loggedInTutorId", validUser.id);
-          navigate("/tutors");
+          navigate("/tutors"); // Corrected path
         } else {
           navigate("/admin");
         }
@@ -107,4 +106,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Login;  
