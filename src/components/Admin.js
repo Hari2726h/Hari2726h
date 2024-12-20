@@ -179,16 +179,20 @@ const Admin = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {marks.map((mark) => (
-                    <TableRow key={mark.id}>
-                      <TableCell>{mark.date}</TableCell>
-                      <TableCell>{mark.status}/100</TableCell>
-                      <TableCell>12/12/2023 10 PM</TableCell>
-                      <TableCell>{mark.status >= 85 ? 'Excellent' : mark.status >= 60 ? 'Good' : 'Poor'}</TableCell>
-                      <TableCell>{mark.status >= 50 ? 'Pass' : 'Fail'}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
+  {marks.map((mark) => (
+    <TableRow key={mark.id}>
+      <TableCell>{mark.name}</TableCell> {/* Corrected key */}
+      <TableCell>{mark.marks}/100</TableCell>
+      <TableCell>12/12/2023 10 PM</TableCell>
+      <TableCell>
+        {mark.marks >= 85 ? 'Excellent' : mark.marks >= 60 ? 'Good' : 'Poor'}
+      </TableCell>
+      <TableCell>{mark.marks >= 50 ? 'Pass' : 'Fail'}</TableCell>
+    </TableRow>
+  ))}
+</TableBody>
+
+
               </Table>
             </TableContainer>
           </Paper>

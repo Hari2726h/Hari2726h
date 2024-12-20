@@ -11,7 +11,7 @@ import achi from '../images/achi.png';
 import time from '../images/time.png';
 import notify from '../images/notify.png';
 import logout from '../images/logout.png';
-
+import NotificationPage from "./NotificationPage";
 const Dashboard = () => {
   const navigate = useNavigate();
 
@@ -81,7 +81,8 @@ const Dashboard = () => {
           <h2>Hello Name</h2>
           <p>Maatram welcomes you to Transformation through Education</p>
           <div className="header-icons">
-            <img src={notify} alt="Notification Bell" className="header-icon" />
+            <img src={notify} alt="Notification Bell" onClick={() => navigate("/notifications")} // Navigate to the Logout component
+              style={{ cursor: "pointer" }} className="header-icon" />
             <img
               src={logout}
               alt="Logout Icon"
@@ -128,9 +129,9 @@ const Dashboard = () => {
             </div>
             <div
               className="details-card"
-              onClick={() => navigate("/reports")}
+              onClick={() => navigate("/feedback")}
             >
-              Download Reports
+             Feedback
             </div>
           </div>
           <div className="info-grid">

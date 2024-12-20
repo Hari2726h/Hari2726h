@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import axios from "axios";
-import Chart from "chart.js/auto"; // Import Chart.js
+import Chart from "chart.js/auto";
 import "./AttendancePage.css";
 
 const AttendancePage = () => {
@@ -16,7 +16,6 @@ const AttendancePage = () => {
   const studentId = localStorage.getItem("loggedInStudentId");
   const API_URL = "http://localhost:5000";
 
-  // Ref for the bar chart
   const barChartRef = useRef(null);
 
   useEffect(() => {
@@ -86,6 +85,56 @@ const AttendancePage = () => {
 
   const attendancePercentage = calculateAttendancePercentage();
 
+  useEffect(() => {
+    if (attendancePercentage < 75) {
+      const manageNotifications = async () => {
+        try {
+          // Fetch existing notifications for the student
+          const response = await axios.get(`${API_URL}/notifications`);
+          const existingNotifications = response.data;
+  
+          // Delete notifications with "Current percentage: 0%"
+          const invalidNotifications = existingNotifications.filter(
+            (notification) =>
+              notification.studentId === studentId &&
+              notification.message.includes("Current percentage: 0%")
+          );
+  
+          for (const notification of invalidNotifications) {
+            await axios.delete(`${API_URL}/notifications/${notification.id}`);
+            console.log(`Deleted invalid notification with ID: ${notification.id}`);
+          }
+  
+          // Check if a valid notification for the current percentage already exists
+          const validNotificationExists = existingNotifications.some(
+            (notification) =>
+              notification.studentId === studentId &&
+              notification.message.includes(`Current percentage: ${attendancePercentage}%`)
+          );
+  
+          // Send a new valid notification if it doesn't exist
+          if (!validNotificationExists) {
+            const notificationResponse = await axios.post(`${API_URL}/notifications`, {
+              title: "Low Attendance Alert",
+              message: `Your attendance percentage is below 75%. Current percentage: ${attendancePercentage}%`,
+              timestamp: new Date().toISOString(),
+              read: false,
+              studentId: studentId,
+            });
+  
+            console.log("Notification sent:", notificationResponse.data);
+          }
+        } catch (error) {
+          console.error("Error managing notifications:", error);
+        }
+      };
+  
+      manageNotifications();
+    }
+  }, [attendancePercentage, studentId]);
+  
+  
+
   // Bar Chart Effect
   useEffect(() => {
     let barChartInstance;
@@ -93,22 +142,20 @@ const AttendancePage = () => {
     if (barChartRef.current && filteredData.length > 0) {
       const ctx = barChartRef.current.getContext("2d");
 
-      // Destroy existing chart instance to avoid duplication
       if (barChartInstance) {
         barChartInstance.destroy();
       }
 
-      // Create new bar chart instance
       barChartInstance = new Chart(ctx, {
         type: "bar",
         data: {
-          labels: filteredData.map((record) => record.Date), // Dates as labels
+          labels: filteredData.map((record) => record.Date),
           datasets: [
             {
               label: "Attendance Percentage",
               data: filteredData.map((record) =>
                 record.Status === "Present" ? 100 : 0
-              ), // 100% for present, 0% for absent
+              ),
               backgroundColor: "#4CAF50",
               borderColor: "#388E3C",
               borderWidth: 1,
@@ -120,7 +167,7 @@ const AttendancePage = () => {
           scales: {
             y: {
               beginAtZero: true,
-              max: 100, // Maximum percentage is 100
+              max: 100,
               title: {
                 display: true,
                 text: "Attendance Percentage (%)",
@@ -236,7 +283,6 @@ const AttendancePage = () => {
         </div>
       )}
 
-      {/* Bar Chart */}
       <div className="chart-section">
         <canvas ref={barChartRef} width="400" height="300"></canvas>
       </div>

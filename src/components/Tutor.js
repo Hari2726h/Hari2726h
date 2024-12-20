@@ -3,24 +3,24 @@ import axios from "axios";
 import "./Tutor.css";
 import notify from "../images/notify.png";
 import logout from "../images/logout.png";
-import profile from '../images/profile.png';
+import profile from "../images/profile.png";
 import { useNavigate } from "react-router-dom";
 
 const Tutor = () => {
-  const navigate = useNavigate(); // Initialize navigate
+  const navigate = useNavigate();
   const [tutorData, setTutorData] = useState(null);
+  const [feedbackData, setFeedbackData] = useState([]); // State for storing feedback
+  const [showFeedback, setShowFeedback] = useState(false); // State to toggle feedback display
 
   useEffect(() => {
-    // Retrieve the logged-in tutor ID from localStorage
     const loggedInTutorId = localStorage.getItem("loggedInTutorId");
 
     if (!loggedInTutorId) {
       alert("No tutor is currently logged in.");
-      navigate("/login"); // Redirect to login if no tutor is logged in
+      navigate("/login");
       return;
     }
 
-    // Fetch the data for the logged-in tutor
     axios
       .get(`http://localhost:5000/tutors/${loggedInTutorId}`)
       .then((response) => {
@@ -30,7 +30,22 @@ const Tutor = () => {
         console.error("Error fetching tutor data:", error);
         alert("Failed to fetch tutor data. Please try again.");
       });
+
+    // Fetch feedback for this tutor
+    axios
+      .get(`http://localhost:5000/feedback`)
+      .then((response) => {
+        // Filter feedback by tutor id (assuming feedback has tutorId or similar)
+        setFeedbackData(response.data.filter((item) => item.tutorId === loggedInTutorId));
+      })
+      .catch((error) => {
+        console.error("Error fetching feedback data:", error);
+      });
   }, [navigate]);
+
+  const handleFeedbackClick = () => {
+    setShowFeedback(!showFeedback); // Toggle feedback display
+  };
 
   if (!tutorData) {
     return <p>Loading...</p>;
@@ -51,15 +66,15 @@ const Tutor = () => {
           <img
             src={profile}
             alt="Notification Bell"
-            onClick={() => navigate("/tp")} // Navigate to notifications page
-            style={{ cursor: "pointer"}}
+            onClick={() => navigate("/tp")}
+            style={{ cursor: "pointer" }}
             className="header-icon"
           />
           <img
             src={logout}
             alt="Logout Icon"
             className="header-icon"
-            onClick={() => navigate("/logout")} // Navigate to logout
+            onClick={() => navigate("/logout")}
             style={{ cursor: "pointer" }}
           />
         </div>
@@ -106,7 +121,7 @@ const Tutor = () => {
             <p>{tutorData.graduationYear}</p>
           </div>
           <div className="info-row">
-            <strong>Parent Mobile No:</strong>
+            <strong>Experience:</strong>
             <p>{tutorData.parentContact}</p>
           </div>
           <div className="info-row">
@@ -122,11 +137,31 @@ const Tutor = () => {
 
       {/* Info Cards */}
       <div className="info-cards">
-        <div className="info-card">Subject Taught</div>
-        <div className="info-card">Experience</div>
+        <div className="info-card">Students</div>
+        <div className="info-card" onClick={handleFeedbackClick}>
+          Student's Feedback
+        </div>
         <div className="info-card">Volunteering Works</div>
         <div className="info-card">Achievements</div>
       </div>
+
+      {/* Feedback Section */}
+      {showFeedback && (
+        <div className="feedback-section">
+          <h2>Feedback for {tutorData.name}</h2>
+          {feedbackData.length > 0 ? (
+            feedbackData.map((feedback, index) => (
+              <div key={index} className="feedback-item">
+                <p><strong>Student ID:</strong> {feedback.studentId}</p>
+                <p><strong>Feedback:</strong> {feedback.feedback}</p>
+                <p><strong>Timestamp:</strong> {feedback.timestamp}</p>
+              </div>
+            ))
+          ) : (
+            <p>No feedback available for this tutor.</p>
+          )}
+        </div>
+      )}
 
       {/* Role Section */}
       <div className="role-section">

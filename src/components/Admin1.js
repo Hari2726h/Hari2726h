@@ -84,7 +84,6 @@ const navigate = useNavigate(); // Initialize navigate
       }
     }
   };
-
   const handleSubmit = async () => {
     const endpoint = modalType.includes("Tutor")
       ? "http://localhost:5000/tutors"
@@ -93,22 +92,14 @@ const navigate = useNavigate(); // Initialize navigate
     const method = modalType.includes("Add") ? "POST" : "PUT";
     const url = modalType.includes("Add") ? endpoint : `${endpoint}/${formData.id}`;
   
-    // Ensure missing values are set to default values
-    const studentData = {
-      ...formData,
+    const requestData = {
+      id: formData.id, // Ensure ID is included
       name: formData.name || "",
       email: formData.email || "",
       contact: formData.contact || "",
-      grade: formData.grade || "",
-      address: formData.address || "-",  // Default to "-" if missing
-      gender: formData.gender || "-",    // Default to "-" if missing
-      age: formData.age || "-",          // Default to "-" if missing
-      familyDetails: formData.familyDetails || {
-        fatherName: "-",
-        motherName: "-",
-        guardianContact: "-",
-      },  // Default to "-" if family details are missing
-      cutoff: formData.cutoff || "-",    // Default to "-" if missing
+      password: formData.password || "",
+      ...(modalType.includes("Tutor") && { subject: formData.subject || "" }),
+      ...(modalType.includes("Student") && { grade: formData.grade || "" }),
     };
   
     try {
@@ -117,7 +108,7 @@ const navigate = useNavigate(); // Initialize navigate
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(studentData),
+        body: JSON.stringify(requestData),
       });
   
       if (!response.ok) {
@@ -149,6 +140,7 @@ const navigate = useNavigate(); // Initialize navigate
     }
   };
   
+    
   const filteredData = activeTab === "Tutors" ? tutors : students;
   const filteredList = filteredData.filter((item) => item.name.toLowerCase().includes(filter.toLowerCase()));
 
@@ -314,80 +306,102 @@ const navigate = useNavigate(); // Initialize navigate
 
       {/* Modal for Add/Edit */}
       {showModal && (
-        <div className="modal">
-          <div className="modal-content">
-            <h3>{modalType}</h3>
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                handleSubmit();
-              }}
-            >
-              <label>
-                Name:
-                <input
-                  type="text"
-                  value={formData.name || ""}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  required
-                />
-              </label>
-              <label>
-                Email:
-                <input
-                  type="email"
-                  value={formData.email || ""}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  required
-                />
-              </label>
-              {modalType.includes("Tutor") && (
-                <label>
-                  Subject:
-                  <input
-                    type="text"
-                    value={formData.subject || ""}
-                    onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                    required
-                  />
-                </label>
-              )}
-              {modalType.includes("Student") && (
-                <label>
-                  Grade:
-                  <input
-                    type="text"
-                    value={formData.grade || ""}
-                    onChange={(e) => setFormData({ ...formData, grade: e.target.value })}
-                    required
-                  />
-                </label>
-              )}
-              <label>
-                Contact:
-                <input
-                  type="text"
-                  value={formData.contact || ""}
-                  onChange={(e) => setFormData({ ...formData, contact: e.target.value })}
-                  required
-                />
-              </label>
-              <div className="modal-actions">
-                <button type="submit" className="save-btn">
-                  Save
-                </button>
-                <button
-                  type="button"
-                  className="cancel-btn"
-                  onClick={() => setShowModal(false)}
-                >
-                  Cancel
-                </button>
-              </div>
-            </form>
-          </div>
+  <div className="modal">
+    <div className="modal-content">
+      <h3>{modalType}</h3>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSubmit();
+        }}
+      >
+        <label>
+          ID:
+          <input
+            type="text"
+            value={formData.id || ""}
+            onChange={(e) => setFormData({ ...formData, id: e.target.value })}
+            required
+            disabled={modalType.includes("Edit")}
+          />
+        </label>
+        <label>
+          Name:
+          <input
+            type="text"
+            value={formData.name || ""}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            required
+          />
+        </label>
+        <label>
+          Email:
+          <input
+            type="email"
+            value={formData.email || ""}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            required
+          />
+        </label>
+        {modalType.includes("Tutor") && (
+          <label>
+            Subject:
+            <input
+              type="text"
+              value={formData.subject || ""}
+              onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+              required
+            />
+          </label>
+        )}
+        {modalType.includes("Student") && (
+          <label>
+            Grade:
+            <input
+              type="text"
+              value={formData.grade || ""}
+              onChange={(e) => setFormData({ ...formData, grade: e.target.value })}
+              required
+            />
+          </label>
+        )}
+        <label>
+          Contact:
+          <input
+            type="text"
+            value={formData.contact || ""}
+            onChange={(e) => setFormData({ ...formData, contact: e.target.value })}
+            required
+          />
+        </label>
+        <label>
+          Password:
+          <input
+            type="password"
+            value={formData.password || ""}
+            onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+            required
+          />
+        </label>
+        <div className="modal-actions">
+          <button type="submit" className="save-btn">
+            Save
+          </button>
+          <button
+            type="button"
+            className="cancel-btn"
+            onClick={() => setShowModal(false)}
+          >
+            Cancel
+          </button>
         </div>
-      )}
+      </form>
+    </div>
+  </div>
+)}
+
+
+
     </div>
   );
 };

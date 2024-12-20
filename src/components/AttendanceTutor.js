@@ -7,6 +7,7 @@ import "./AttendanceTutor.css";
 
 const AttendanceTutor = ({ loggedInTutorId }) => {
   const [attendanceData, setAttendanceData] = useState([]);
+  const [tutorData, setTutorData] = useState(null); // New state for tutor details
   const [searchDate, setSearchDate] = useState("");
   const [filteredData, setFilteredData] = useState([]);
   const [visibleDetails, setVisibleDetails] = useState(null);
@@ -54,14 +55,11 @@ const AttendanceTutor = ({ loggedInTutorId }) => {
   };
 
   useEffect(() => {
-    // Fetch attendance data from the server and filter by loggedInTutorId
+    // Fetch attendance data
     axios
       .get(`${API_URL}/attendance`)
       .then((response) => {
-        let attendanceData = response.data;
-  
-        // Normalize the attendance data structure
-        attendanceData = normalizeAttendance(attendanceData);
+        let attendanceData = normalizeAttendance(response.data);
   
         // Filter attendance for the logged-in tutor only
         const tutorAttendance = attendanceData.filter(
@@ -69,11 +67,21 @@ const AttendanceTutor = ({ loggedInTutorId }) => {
         );
   
         setAttendanceData(tutorAttendance);
-        setFilteredData(tutorAttendance); // Default filtered data is the same as the fetched data
+        setFilteredData(tutorAttendance);
       })
       .catch((error) => console.error("Error fetching attendance data:", error));
+  
+    // Fetch tutor data
+    axios
+      .get(`${API_URL}/tutors`) // Fixed URL formatting
+      .then((response) => {
+        const tutor = response.data.find((tutor) => tutor.id === loggedInTutorId);
+        setTutorData(tutor); // Ensure tutor data is correctly set
+      })
+      .catch((error) => console.error("Error fetching tutor data:", error));
   }, [loggedInTutorId]);
   
+
   const handleFileUpload = async (event) => {
     const file = event.target.files[0];
     if (!file) {
@@ -128,14 +136,46 @@ const AttendanceTutor = ({ loggedInTutorId }) => {
   
     reader.readAsArrayBuffer(file);
   };
+  useEffect(() => {
+    axios
+      .get(`${API_URL}/tutors`)
+      .then((response) => {
+        console.log("Fetched tutors:", response.data);
+        const tutor = response.data.find((tutor) => tutor.id === loggedInTutorId);
+        console.log("Fetched tutor:", tutor);
+        setTutorData(tutor);
+      })
+      .catch((error) => console.error("Error fetching tutor data:", error));
+  }, [loggedInTutorId]);
   
   
-
   return (
     <div id="attendance-page" className="attendance-page">
       <header className="header">
         <h1 className="title">Attendance Tracker</h1>
       </header>
+      <div className="student-info">
+  <img
+    className="student-photo"
+    src="https://www.w3schools.com/w3images/avatar2.png"
+    alt="Tutor"
+  />
+  <div className="student-details">
+    {tutorData ? (
+      <>
+        <h2>{tutorData.name || "Name not available"}</h2>
+        <p>{tutorData.college || "College information not available"}</p>
+        <p>Email: {tutorData.email || "Email not available"}</p>
+      </>
+    ) : (
+      <p>Loading tutor information...</p>
+    )}
+  </div>
+</div>
+
+
+
+
       <div className="tracker-container">
         <div className="search-section">
           <input

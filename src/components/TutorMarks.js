@@ -62,7 +62,7 @@ const TutorMarks = () => {
       alert("No file selected.");
       return;
     }
-
+  
     const validTypes = [
       "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
       "application/vnd.ms-excel",
@@ -71,7 +71,7 @@ const TutorMarks = () => {
       alert("Please upload a valid Excel file.");
       return;
     }
-
+  
     const reader = new FileReader();
     reader.onload = async (e) => {
       const data = new Uint8Array(e.target.result);
@@ -79,55 +79,56 @@ const TutorMarks = () => {
       const sheetName = workbook.SheetNames[0];
       const sheet = workbook.Sheets[sheetName];
       const jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
-
+  
+      // Extract columns correctly
       const newMarksData = jsonData.slice(1).map((row, index) => {
-        const [studentId, rawDate, status] = row;
-        const formattedDate = isNaN(rawDate) ? rawDate : excelDateToJSDate(rawDate);
+        const [studentId, name, marks, testId, topic] = row;
         return {
           id: (Date.now() + index).toString(), // Unique ID
           studentId: String(studentId),
-          date: formattedDate,
-          status: status || "Unknown",
+          name: name || "Unknown",
+          marks: marks || 0,
+          testId: testId || "N/A",
+          topic: topic || "N/A",
           uploadedByTutorId: 1, // Replace with dynamic tutor ID if needed
         };
       });
-
+  
       try {
-        // Validate and merge with existing data
         const { data: existingMarks } = await axios.get(`${API_URL}/marks`);
         const normalizedExisting = normalizeMarks(existingMarks);
-
+  
         // Filter out duplicates
         const uniqueData = newMarksData.filter(
           (newRecord) =>
             !normalizedExisting.some(
               (existingRecord) =>
                 existingRecord.studentId === newRecord.studentId &&
-                existingRecord.date === newRecord.date
+                existingRecord.name === newRecord.name
             )
         );
-
+  
         if (uniqueData.length === 0) {
           alert("No new unique marks records to upload.");
           return;
         }
-
+  
         // Post unique data to backend
         await Promise.all(
           uniqueData.map((record) => axios.post(`${API_URL}/marks`, record))
         );
-
+  
         alert("Marks uploaded successfully!");
-        setMarksData([...marksData, ...uniqueData]); // Update state
+        setMarksData([...marksData, ...uniqueData]);
       } catch (error) {
         console.error("Error uploading marks:", error);
         alert("Failed to upload marks.");
       }
     };
-
+  
     reader.readAsArrayBuffer(file);
   };
-
+  
   // Fetch marks data from the backend
   React.useEffect(() => {
     axios
@@ -172,44 +173,48 @@ const TutorMarks = () => {
         </div>
         <div className="marks-details">
           <table className="marks-table">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Date</th>
-                <th>Marks</th>
-                <th>Details</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredData.map((record, index) => (
-                <React.Fragment key={index}>
-                  <tr>
-                    <td>{record.studentId}</td>
-                    <td>{record.name || "Unknown"}</td>
-                    <td>{record.date}</td>
-                    <td>{record.status}</td>
-                    <td>
-                      <button onClick={() => handleToggleDetails(index)}>
-                        {visibleDetails === index ? "Hide" : "Show"} Details
-                      </button>
-                    </td>
-                  </tr>
-                  {visibleDetails === index && (
-                    <tr>
-                      <td colSpan="5">
-                        <div className="details">
-                          <p>Student ID: {record.studentId}</p>
-                          <p>Date: {record.date}</p>
-                          <p>Status: {record.status}</p>
-                        </div>
-                      </td>
-                    </tr>
-                  )}
-                </React.Fragment>
-              ))}
-            </tbody>
-          </table>
+          <thead>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Marks</th>
+    <th>Test ID</th>
+    <th>Topic</th>
+    <th>Details</th>
+  </tr>
+</thead>
+<tbody>
+  {filteredData.map((record, index) => (
+    <React.Fragment key={index}>
+      <tr>
+        <td>{record.studentId}</td>
+        <td>{record.name}</td>
+        <td>{record.marks}</td>
+        <td>{record.testId}</td>
+        <td>{record.topic}</td>
+        <td>
+          <button onClick={() => handleToggleDetails(index)}>
+            {visibleDetails === index ? "Hide" : "Show"} Details
+          </button>
+        </td>
+      </tr>
+      {visibleDetails === index && (
+        <tr>
+          <td colSpan="6">
+            <div className="details">
+              <p>Student ID: {record.studentId}</p>
+              <p>Name: {record.name}</p>
+              <p>Marks: {record.marks}</p>
+              <p>Test ID: {record.testId}</p>
+              <p>Topic: {record.topic}</p>
+            </div>
+          </td>
+        </tr>
+      )}
+    </React.Fragment>
+  ))}
+</tbody>
+ </table>
         </div>
         <div className="download-section">
           <button className="download-btn" onClick={handleDownload}>

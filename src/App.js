@@ -21,6 +21,8 @@ import AttendanceTutor from "./components/AttendanceTutor";
 import TutorMarks from "./components/TutorMarks";
 import Admin1 from "./components/Admin1";
 import Tprofile from "./components/Tprofile";
+import NotificationPage from "./components/NotificationPage";
+import FeedbackPage from "./components/FeedbackPage";
 const App = () => {
   return (
     <Router>
@@ -30,6 +32,8 @@ const App = () => {
 
         {/* Role Selection Page */}
         <Route path="/role-selection" element={<RoleSelection />} />
+        <Route path="/notifications" element={<NotificationPage />} />
+        <Route path="/Feedback" element={<FeedbackPage />} />
 
         {/* Login Route */}
         <Route path="/login" element={<Login />} />

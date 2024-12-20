@@ -72,7 +72,7 @@
       "address": "Coimbatore",
       "dob": "24/01/2004",
       "graduationYear": "2020-2024",
-      "parentContact": "0987654321",
+      "Experience": "0987654321",
       "gender": "Female",
       "designation": "Senior Maths Tutor",
       "subject": "Mathematics",
@@ -95,9 +95,27 @@
       "address": "Coimbatore",
       "dob": "24/01/2004",
       "graduationYear": "2020-2024",
-      "parentContact": "",
+      "Experience": "",
       "gender": "Female",
       "designation": "Anchor"
+    },
+    {
+      "id": "3",
+      "name": "HARIHARAN C",
+      "email": "hari2726h@gmail.com",
+      "password": "hari",
+      "subject": "maths",
+      "contact": "9943105704",
+      "grade": "",
+      "address": "-",
+      "gender": "-",
+      "age": "-",
+      "familyDetails": {
+        "fatherName": "-",
+        "motherName": "-",
+        "guardianContact": "-"
+      },
+      "cutoff": "-"
     }
   ],
   "anchors": [
@@ -112,6 +130,15 @@
       "name": "Jane Smith",
       "subject": "Science",
       "contact": "8765432109"
+    }
+  ],
+  "feedback": [
+    {
+      "id": "896d",
+      "studentId": "1",
+      "tutorId": "2",
+      "feedback": "nice",
+      "timestamp": "2024-12-18T16:33:27.252Z"
     }
   ],
   "attendance": [
@@ -140,50 +167,98 @@
       "Hours Present": "-"
     },
     {
-      "id": 1734444706070,
+      "id": "1734532751779",
       "Student ID": "1",
       "Date": "2024-12-01",
-      "Status": "Present",
-      "Meeting": "Student anchor meeting",
-      "Hours Present": 1
+      "Status": "Absent",
+      "Meeting": "Sangamam meeting",
+      "Hours Present": "-"
     },
     {
-      "id": 1734444706071,
-      "Student ID": 4,
+      "id": "1734532751780",
+      "Student ID": "2",
       "Date": "2024-12-01",
       "Status": "Absent",
-      "Meeting": "Inter College meeting",
+      "Meeting": "Sangamam meeting",
       "Hours Present": 0.45
     },
     {
-      "id": 1734444706072,
-      "Student ID": 5,
+      "id": "1734532751781",
+      "Student ID": "3",
       "Date": "2024-12-01",
       "Status": "Present",
-      "Meeting": "Inter College meeting",
-      "Hours Present": "-"
+      "Meeting": "Sangamam meeting",
+      "Hours Present": 1
+    },
+    {
+      "id": "1734533063480",
+      "Student ID": "1",
+      "Date": "2024-12-02",
+      "Status": "Present",
+      "Meeting": "Student Anchor meeting",
+      "Hours Present": 1
+    },
+    {
+      "id": "1734533063481",
+      "Student ID": "2",
+      "Date": "2024-12-01",
+      "Status": "Absent",
+      "Meeting": "Student Anchor meeting",
+      "Hours Present": 0.45
+    },
+    {
+      "id": "1734533063482",
+      "Student ID": "3",
+      "Date": "2024-12-01",
+      "Status": "Absent",
+      "Meeting": "Student Anchor meeting",
+      "Hours Present": 0.3
+    }
+  ],
+  "notifications": [
+    {
+      "id": "4433",
+      "title": "Low Attendance Alert",
+      "message": "Your attendance percentage is below 75%. Current percentage: 66.67%",
+      "timestamp": "2024-12-18T16:08:56.844Z",
+      "read": false,
+      "studentId": "3"
+    },
+    {
+      "id": "9f56",
+      "title": "Low Attendance Alert",
+      "message": "Your attendance percentage is below 75%. Current percentage: 66.67%",
+      "timestamp": "2024-12-19T14:14:16.759Z",
+      "read": false,
+      "studentId": "1"
     }
   ],
   "marks": [
     {
-      "id": "1734238687765",
+      "id": "1734535468382",
       "studentId": "1",
-      "date": "Alice Johnson",
-      "status": 85,
+      "name": "Alice Johnson",
+      "marks": 85,
+      "testId": 1,
+      "topic": "Reasoning",
       "uploadedByTutorId": 1
     },
     {
-      "id": "1734238687766",
+      "id": "1734535468383",
       "studentId": "2",
-      "date": "Bob Smith",
-      "status": 45,
+      "name": "Bob Smith",
+      "marks": 45,
+      "testId": 1,
+      "topic": "Reasoning",
       "uploadedByTutorId": 1
     },
     {
-      "id": "1734238687767",
+      "id": "1734535468384",
       "studentId": "3",
-      "date": "Sam Wilson",
-      "status": 72,
+      "name": "Sam Wilson",
+      "marks": 72,
+      "testId": 1,
+      "topic": "Reasoning",
       "uploadedByTutorId": 1
     }
   ]

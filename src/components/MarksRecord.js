@@ -7,7 +7,6 @@ import "./MarksRecord.css";
 const MarksRecord = () => {
   const chartRef = useRef(null);
   const [academicTerm, setAcademicTerm] = useState("");
-  const [semester, setSemester] = useState("");
   const [marksData, setMarksData] = useState([]);
   const [filteredResults, setFilteredResults] = useState([]);
   const [studentName, setStudentName] = useState("");
@@ -49,20 +48,20 @@ const MarksRecord = () => {
   useEffect(() => {
     let chartInstance;
 
-    if (chartRef.current && marksData.length > 0) {
+    if (chartRef.current && filteredResults.length > 0) {
       const ctx = chartRef.current.getContext("2d");
 
       chartInstance = new Chart(ctx, {
-        type: "pie", // Change to pie chart
+        type: "pie",
         data: {
-          labels: marksData.map((r) => r.date),
+          labels: filteredResults.map((r) => r.testId),
           datasets: [
             {
               label: "Marks",
-              data: marksData.map((r) => r.status),
+              data: filteredResults.map((r) => r.marks), // Fix the data to reflect the marks
               backgroundColor: [
-                "#4CAF50", "#FFC107", "#FF5722", "#2196F3", "#9C27B0", "#FF9800"
-              ], // Add multiple colors for segments
+                "#4CAF50", "#FFC107", "#FF5722", "#2196F3", "#9C27B0", "#FF9800",
+              ],
               borderColor: "#ffffff",
               borderWidth: 1,
             },
@@ -72,15 +71,15 @@ const MarksRecord = () => {
           responsive: true,
           plugins: {
             legend: {
-              position: 'top',
+              position: "top",
             },
             tooltip: {
               callbacks: {
-                label: function(tooltipItem) {
-                  return `${tooltipItem.label}: ${tooltipItem.raw} marks`;
-                }
-              }
-            }
+                label: function (tooltipItem) {
+                  return `${tooltipItem.label}: ${tooltipItem.raw} marks`; // Fix the tooltip format
+                },
+              },
+            },
           },
         },
       });
@@ -89,17 +88,15 @@ const MarksRecord = () => {
     return () => {
       if (chartInstance) chartInstance.destroy();
     };
-  }, [marksData]);
+  }, [filteredResults]);
 
   const handleSearch = () => {
     const filtered = marksData.filter((record) => {
-      if (academicTerm.trim() === record.date) {
-        if (semester.trim()) {
-          return record.date.toLowerCase().includes(semester.trim().toLowerCase());
-        }
-        return true;
-      }
-      return false;
+      const matchesTerm = academicTerm.trim()
+        ? record.testId.toString().includes(academicTerm.trim())
+        : true;
+
+      return matchesTerm;
     });
 
     setFilteredResults(filtered);
@@ -120,9 +117,9 @@ const MarksRecord = () => {
 
   const calculateCumulativePercentage = () => {
     if (filteredResults.length === 0) return 0;
-    const totalMarks = filteredResults.reduce((sum, record) => sum + Number(record.status), 0);
-    const percentage = (totalMarks / (filteredResults.length * 100)) * 100; // Assuming max marks are 100 per subject
-    return percentage.toFixed(2); // Return percentage with two decimal places
+    const totalMarks = filteredResults.reduce((sum, record) => sum + Number(record.marks), 0);
+    const percentage = (totalMarks / (filteredResults.length * 100)) * 100; // Assuming max marks are 100 per test
+    return percentage.toFixed(2);
   };
 
   return (
@@ -136,7 +133,6 @@ const MarksRecord = () => {
         </div>
         <h1>Marks Record for {studentName}</h1>
       </header>
-      {/* Student Information */}
       <div className="student-info">
         <img
           className="student-photo"
@@ -151,21 +147,12 @@ const MarksRecord = () => {
       </div>
       <div className="filters">
         <div className="date-picker">
-          <label>Academic Term</label>
+          <label>Test ID</label>
           <input
             type="text"
-            placeholder="Enter Academic Term"
+            placeholder="Enter Test ID"
             value={academicTerm}
             onChange={(e) => setAcademicTerm(e.target.value)}
-          />
-        </div>
-        <div className="date-picker">
-          <label>Semester</label>
-          <input
-            type="text"
-            placeholder="Enter Semester"
-            value={semester}
-            onChange={(e) => setSemester(e.target.value)}
           />
         </div>
         <button className="search-button" onClick={handleSearch}>
@@ -182,6 +169,8 @@ const MarksRecord = () => {
             <th>S.NO</th>
             <th>Name</th>
             <th>Marks</th>
+            <th>Test ID</th>
+            <th>Topic</th>
             <th>Uploaded By</th>
           </tr>
         </thead>
@@ -190,28 +179,28 @@ const MarksRecord = () => {
             filteredResults.map((row, index) => (
               <tr key={row.id}>
                 <td>{index + 1}</td>
-                <td>{row.date}</td>
-                <td>{row.status}</td>
+                <td>{row.name}</td>
+                <td>{row.marks}</td>
+                <td>{row.testId}</td>
+                <td>{row.topic}</td>
                 <td>Anchor {row.uploadedByTutorId}</td>
               </tr>
             ))
           ) : (
             <tr>
-              <td colSpan="4">No records found.</td>
+              <td colSpan="6">No records found.</td>
             </tr>
           )}
         </tbody>
       </table>
 
-      {/* Cumulative Percentage */}
       <div className="cumulative-percentage">
         <h3>
           Cumulative Percentage: <span>{calculateCumulativePercentage()}%</span>
         </h3>
       </div>
-
       <div className="chart-section">
-        <canvas ref={chartRef} width="300" height="300"></canvas> {/* Adjusted size */}
+        <canvas ref={chartRef} width="300" height="300"></canvas>
       </div>
     </div>
   );
