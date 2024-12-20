@@ -30,7 +30,7 @@
   "scripts": {
     "start": "concurrently \"npm run server\" \"serve -s build -l $PORT\"",
     "server": "json-server --watch db.json --port 5000",
-    "build": "react-scripts build && GENERATE_SOURCEMAP=false react-scripts build"
+    "build": "GENERATE_SOURCEMAP=false react-scripts build"
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
