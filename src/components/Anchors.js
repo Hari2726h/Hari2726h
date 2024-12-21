@@ -12,7 +12,7 @@ const Anchors = () => {
 
     if (studentId) {
       axios
-        .get(`${backendURL}/students/${studentId}`)
+        .get(`${backendURL}/anchors/${studentId}`)
         .then((response) => {
           setAnchors(response.data.anchors || []);
         })

@@ -1,15 +1,15 @@
 
-  const barChartRef = useRef(null);
-  import React, { useState, useEffect, useRef } from "react";
-  import html2canvas from "html2canvas";
-  import jsPDF from "jspdf";
-  import axios from "axios";
-  import Chart from "chart.js/auto";
-  import "./AttendancePage.css";
-  
-  const backendURL = process.env.NEXT_PUBLIC_BACKEND_URL || "https://json-server-backend-6y18.onrender.com";
-  
-  const AttendancePage = () => {
+import React, { useState, useEffect, useRef } from "react";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
+import axios from "axios";
+import Chart from "chart.js/auto";
+import "./AttendancePage.css";
+
+const backendURL = "https://json-server-backend-6y18.onrender.com";
+
+const AttendancePage = () => {
+    // const barChartRef = useRef(null);
     const [attendanceData, setAttendanceData] = useState([]);
     const [filteredData, setFilteredData] = useState([]);
     const [studentName, setStudentName] = useState("");
@@ -89,7 +89,7 @@
       const manageNotifications = async () => {
         try {
           // Fetch existing notifications for the student
-          const response = await axios.get(`${API_URL}/notifications`);
+          const response = await axios.get(`$${backendURL}/notifications`);
           const existingNotifications = response.data;
   
           // Delete notifications with "Current percentage: 0%"
@@ -100,7 +100,7 @@
           );
   
           for (const notification of invalidNotifications) {
-            await axios.delete(`${API_URL}/notifications/${notification.id}`);
+            await axios.delete(`$${backendURL}/notifications/${notification.id}`);
             console.log(`Deleted invalid notification with ID: ${notification.id}`);
           }
   
@@ -113,7 +113,7 @@
   
           // Send a new valid notification if it doesn't exist
           if (!validNotificationExists) {
-            const notificationResponse = await axios.post(`${API_URL}/notifications`, {
+            const notificationResponse = await axios.post(`$${backendURL}/notifications`, {
               title: "Low Attendance Alert",
               message: `Your attendance percentage is below 75%. Current percentage: ${attendancePercentage}%`,
               timestamp: new Date().toISOString(),
