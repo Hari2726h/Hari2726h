@@ -1,89 +1,88 @@
-import React, { useState, useEffect, useRef } from "react";
-import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
-import axios from "axios";
-import Chart from "chart.js/auto";
-import "./AttendancePage.css";
-
-const AttendancePage = () => {
-  const [attendanceData, setAttendanceData] = useState([]);
-  const [filteredData, setFilteredData] = useState([]);
-  const [studentName, setStudentName] = useState("");
-  const [studentClass, setStudentClass] = useState("");
-  const [studentEmail, setStudentEmail] = useState("");
-  const [fromDate, setFromDate] = useState("");
-  const [toDate, setToDate] = useState("");
-  const studentId = localStorage.getItem("loggedInStudentId");
-  const API_URL = "https://json-server-backend-6y18.onrender.com";
 
   const barChartRef = useRef(null);
-
-  useEffect(() => {
-    if (!studentId) {
-      alert("Student ID is missing. Please log in again.");
-      return;
-    }
-
-    const fetchAttendance = async () => {
-      try {
-        const attendanceResponse = await axios.get(`${API_URL}/attendance`);
-        const studentResponse = await axios.get(`${API_URL}/students/${studentId}`);
-        const studentAttendance = attendanceResponse.data.filter(
-          (record) => record["Student ID"] === studentId
-        );
-        setAttendanceData(studentAttendance);
-        setFilteredData(studentAttendance);
-        setStudentName(studentResponse.data.name);
-        setStudentClass(studentResponse.data.class);
-        setStudentEmail(studentResponse.data.email);
-      } catch (error) {
-        console.error("Error fetching attendance data:", error);
-        alert("An error occurred while fetching attendance data.");
+  import React, { useState, useEffect, useRef } from "react";
+  import html2canvas from "html2canvas";
+  import jsPDF from "jspdf";
+  import axios from "axios";
+  import Chart from "chart.js/auto";
+  import "./AttendancePage.css";
+  
+  const backendURL = process.env.NEXT_PUBLIC_BACKEND_URL || "https://json-server-backend-6y18.onrender.com";
+  
+  const AttendancePage = () => {
+    const [attendanceData, setAttendanceData] = useState([]);
+    const [filteredData, setFilteredData] = useState([]);
+    const [studentName, setStudentName] = useState("");
+    const [studentClass, setStudentClass] = useState("");
+    const [studentEmail, setStudentEmail] = useState("");
+    const [fromDate, setFromDate] = useState("");
+    const [toDate, setToDate] = useState("");
+    const studentId = localStorage.getItem("loggedInStudentId");
+    const barChartRef = useRef(null);
+  
+    useEffect(() => {
+      if (!studentId) {
+        alert("Student ID is missing. Please log in again.");
+        return;
       }
+  
+      const fetchAttendance = async () => {
+        try {
+          const attendanceResponse = await axios.get(`${backendURL}/attendance`);
+          const studentResponse = await axios.get(`${backendURL}/students/${studentId}`);
+          const studentAttendance = attendanceResponse.data.filter(
+            (record) => record["Student ID"] === studentId
+          );
+          setAttendanceData(studentAttendance);
+          setFilteredData(studentAttendance);
+          setStudentName(studentResponse.data.name);
+          setStudentClass(studentResponse.data.class);
+          setStudentEmail(studentResponse.data.email);
+        } catch (error) {
+          console.error("Error fetching attendance data:", error);
+          alert("An error occurred while fetching attendance data.");
+        }
+      };
+  
+      fetchAttendance();
+    }, [studentId]);
+  
+    const handleSearch = () => {
+      if (!fromDate || !toDate) {
+        alert("Please select both From Date and To Date.");
+        return;
+      }
+  
+      const filtered = attendanceData.filter((entry) => {
+        const entryDate = new Date(entry.Date);
+        const startDate = new Date(fromDate);
+        const endDate = new Date(toDate);
+        return entryDate >= startDate && entryDate <= endDate;
+      });
+  
+      setFilteredData(filtered);
     };
-
-    fetchAttendance();
-  }, [studentId]);
-
-  const handleSearch = () => {
-    if (!fromDate || !toDate) {
-      alert("Please select both From Date and To Date.");
-      return;
-    }
-
-    const filtered = attendanceData.filter((entry) => {
-      const entryDate = new Date(entry.Date);
-      const startDate = new Date(fromDate);
-      const endDate = new Date(toDate);
-      return entryDate >= startDate && entryDate <= endDate;
-    });
-
-    setFilteredData(filtered);
-  };
-
-  const handleDownload = () => {
-    const element = document.getElementById("attendance-details");
-    html2canvas(element).then((canvas) => {
-      const imgData = canvas.toDataURL("image/png");
-      const pdf = new jsPDF("p", "mm", "a4");
-      const pageWidth = pdf.internal.pageSize.getWidth();
-      const imgWidth = pageWidth;
-      const imgHeight = (canvas.height * pageWidth) / canvas.width;
-      pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
-      pdf.save("AttendanceDetails.pdf");
-    });
-  };
-
-  const calculateAttendancePercentage = () => {
-    const totalRecords = filteredData.length;
-    const totalPresent = filteredData.filter((record) => record.Status === "Present").length;
-    const percentage = totalRecords
-      ? ((totalPresent / totalRecords) * 100).toFixed(2)
-      : 0;
-    return percentage;
-  };
-
-  const attendancePercentage = calculateAttendancePercentage();
+  
+    const handleDownload = () => {
+      const element = document.getElementById("attendance-details");
+      html2canvas(element).then((canvas) => {
+        const imgData = canvas.toDataURL("image/png");
+        const pdf = new jsPDF("p", "mm", "a4");
+        const pageWidth = pdf.internal.pageSize.getWidth();
+        const imgWidth = pageWidth;
+        const imgHeight = (canvas.height * pageWidth) / canvas.width;
+        pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+        pdf.save("AttendanceDetails.pdf");
+      });
+    };
+  
+    const calculateAttendancePercentage = () => {
+      const totalRecords = filteredData.length;
+      const totalPresent = filteredData.filter((record) => record.Status === "Present").length;
+      return totalRecords ? ((totalPresent / totalRecords) * 100).toFixed(2) : 0;
+    };
+  
+    const attendancePercentage = calculateAttendancePercentage();
 
   useEffect(() => {
     if (attendancePercentage < 75) {
