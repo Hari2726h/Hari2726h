@@ -14,7 +14,7 @@ const AttendancePage = () => {
   const [fromDate, setFromDate] = useState("");
   const [toDate, setToDate] = useState("");
   const studentId = localStorage.getItem("loggedInStudentId");
-  const API_URL = "http://localhost:5000";
+  const API_URL = "https://json-server-backend-6y18.onrender.com";
 
   const barChartRef = useRef(null);
 
