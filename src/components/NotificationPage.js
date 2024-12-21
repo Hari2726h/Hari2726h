@@ -13,7 +13,8 @@ import {
 import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
-
+const backendURL = "https://json-server-backend-6y18.onrender.com";
+ 
 const NotificationPage = () => {
   const [notifications, setNotifications] = useState([]);
   const [error, setError] = useState(null);
@@ -23,7 +24,7 @@ const NotificationPage = () => {
     // Fetch notifications from the backend (db.json file)
     const fetchNotifications = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/notifications");
+        const response = await axios.get(`${backendURL}/notifications`);
         // Filter notifications for the logged-in student based on studentId
         const filteredNotifications = response.data.filter(
           (notification) => notification.studentId === studentId
@@ -49,7 +50,7 @@ const NotificationPage = () => {
   const handleDeleteNotification = async (id) => {
     try {
       // Send DELETE request to the backend
-      await axios.delete(`http://localhost:5000/notifications/${id}`);
+      await axios.delete(` ${backendURL}/notifications/${id}`);
       // Update the state to remove the deleted notification
       setNotifications((prev) => prev.filter((notification) => notification.id !== id));
     } catch (err) {

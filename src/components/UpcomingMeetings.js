@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './UpcomingMeetings.css';
+const backendURL = "https://json-server-backend-6y18.onrender.com";
 
 const UpcomingMeetings = () => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -16,7 +17,7 @@ const UpcomingMeetings = () => {
 
     // Fetch meetings from JSON server
     React.useEffect(() => {
-        axios.get('http://localhost:5000/meetings')
+        axios.get(`${backendURL}/meetings`)
             .then(response => {
                 setMeetings(response.data);
             })
@@ -58,7 +59,7 @@ const UpcomingMeetings = () => {
 
     // Add new meeting to the JSON server and update the UI
     const addMeeting = () => {
-        axios.post('http://localhost:5000/meetings', newMeeting)
+        axios.post(`${backendURL}/meetings`, newMeeting)
             .then(response => {
                 setMeetings((prevMeetings) => [...prevMeetings, response.data]);
                 closePopup(); // Close the popup after adding the meeting

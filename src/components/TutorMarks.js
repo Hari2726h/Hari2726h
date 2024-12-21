@@ -10,8 +10,8 @@ const TutorMarks = () => {
   const [searchDate, setSearchDate] = useState("");
   const [filteredData, setFilteredData] = useState([]);
   const [visibleDetails, setVisibleDetails] = useState(null);
-
-  const API_URL = "http://localhost:5000";
+ 
+  const API_URL = "https://json-server-backend-6y18.onrender.com";
 
   const normalizeMarks = (data) => {
     if (Array.isArray(data)) {

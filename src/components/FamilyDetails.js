@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./FamilyDetails.css";
 
+const backendURL = "https://json-server-backend-6y18.onrender.com";
+
 const FamilyDetails = () => {
   const [familyDetails, setFamilyDetails] = useState(null);
 
@@ -10,7 +12,7 @@ const FamilyDetails = () => {
 
     if (studentId) {
       axios
-        .get(`http://localhost:5000/students/${studentId}`)
+        .get(`${backendURL}/students/${studentId}`)
         .then((response) => {
           setFamilyDetails(response.data.familyDetails || null);
         })

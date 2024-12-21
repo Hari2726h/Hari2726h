@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Cutoff.css";
 
+const backendURL = "https://json-server-backend-6y18.onrender.com";
+
 const Cutoff = () => {
   const [cutoff, setCutoff] = useState(null);
 
@@ -10,7 +12,7 @@ const Cutoff = () => {
 
     if (studentId) {
       axios
-        .get(`http://localhost:5000/students/${studentId}`)
+        .get(`${backendURL}/students/${studentId}`)
         .then((response) => {
           setCutoff(response.data.cutoff);
         })

@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import FeedbackIcon from "@mui/icons-material/Feedback";
 import axios from "axios";
+const backendURL = "https://json-server-backend-6y18.onrender.com";
 
 const FeedbackPage = () => {
   const [feedback, setFeedback] = useState("");
@@ -26,7 +27,7 @@ const FeedbackPage = () => {
   useEffect(() => {
     const fetchTutors = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/tutors");
+        const response = await axios.get(`${backendURL}/tutors`);
         setTutors(response.data);
       } catch (err) {
         console.error("Error fetching tutors:", err);
@@ -54,7 +55,7 @@ const FeedbackPage = () => {
     }
     try {
       // Sending feedback to backend (replace with actual API endpoint)
-      await axios.post("http://localhost:5000/feedback", {
+      await axios.post(`${backendURL}/feedback`, {
         studentId,
         tutorId: selectedTutor,
         feedback,

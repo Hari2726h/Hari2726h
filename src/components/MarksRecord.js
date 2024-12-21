@@ -13,8 +13,8 @@ const MarksRecord = () => {
   const [studentClass, setStudentClass] = useState("");
   const [studentEmail, setStudentEmail] = useState("");
   const studentId = localStorage.getItem("loggedInStudentId");
-  const API_URL = "http://localhost:5000";
-
+  const API_URL = "https://json-server-backend-6y18.onrender.com";
+ 
   useEffect(() => {
     if (!studentId) {
       alert("Student ID is missing. Please log in again.");

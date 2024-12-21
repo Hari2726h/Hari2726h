@@ -3,6 +3,9 @@ import "./Admin1.css";
 import logout from '../images/logout.png';
 import Logout from "./Logout";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
+const backendURL = "https://json-server-backend-6y18.onrender.com";
 
 const Admin1 = () => {
     const [activeTab, setActiveTab] = useState("Tutors");
@@ -20,8 +23,8 @@ const Admin1 = () => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-          const tutorsResponse = await fetch("http://localhost:5000/tutors");
-          const studentsResponse = await fetch("http://localhost:5000/students");
+          const tutorsResponse = await fetch(`${backendURL}/tutors`);
+          const studentsResponse = await fetch(`${backendURL}/students`);
           
           if (!tutorsResponse.ok || !studentsResponse.ok) {
               throw new Error("Failed to fetch data from server");
@@ -64,7 +67,7 @@ const navigate = useNavigate(); // Initialize navigate
   const handleDeleteClick = async (type, id) => {
     if (window.confirm(`Are you sure you want to delete this ${type}?`)) {
       try {
-        const endpoint = type === "Tutor" ? `http://localhost:5000/tutors/${id}` : `http://localhost:5000/students/${id}`;
+        const endpoint = type === "Tutor" ? `${backendURL}/tutors/${id}` : `${backendURL}/students/${id}`;
         const response = await fetch(endpoint, { method: "DELETE" });
 
         if (!response.ok) {
@@ -86,8 +89,8 @@ const navigate = useNavigate(); // Initialize navigate
   };
   const handleSubmit = async () => {
     const endpoint = modalType.includes("Tutor")
-      ? "http://localhost:5000/tutors"
-      : "http://localhost:5000/students";
+      ? `${backendURL}/tutors`
+      : `${backendURL}/students`;
   
     const method = modalType.includes("Add") ? "POST" : "PUT";
     const url = modalType.includes("Add") ? endpoint : `${endpoint}/${formData.id}`;

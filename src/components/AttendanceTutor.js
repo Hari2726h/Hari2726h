@@ -5,6 +5,8 @@ import * as XLSX from "xlsx";
 import axios from "axios";
 import "./AttendanceTutor.css";
 
+const API_URL = "https://json-server-backend-6y18.onrender.com";
+
 const AttendanceTutor = ({ loggedInTutorId }) => {
   const [attendanceData, setAttendanceData] = useState([]);
   const [tutorData, setTutorData] = useState(null); // New state for tutor details
@@ -12,7 +14,6 @@ const AttendanceTutor = ({ loggedInTutorId }) => {
   const [filteredData, setFilteredData] = useState([]);
   const [visibleDetails, setVisibleDetails] = useState(null);
 
-  const API_URL = "http://localhost:5000";
 
   const normalizeAttendance = (data) => {
     return Array.isArray(data) ? data : Object.values(data);

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Anchors.css";
 
+const backendURL = "https://json-server-backend-6y18.onrender.com";
+
 const Anchors = () => {
   const [anchors, setAnchors] = useState([]);
 
@@ -10,7 +12,7 @@ const Anchors = () => {
 
     if (studentId) {
       axios
-        .get(`http://localhost:5000/students/${studentId}`)
+        .get(`${backendURL}/students/${studentId}`)
         .then((response) => {
           setAnchors(response.data.anchors || []);
         })

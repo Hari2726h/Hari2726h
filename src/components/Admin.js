@@ -55,24 +55,25 @@ const Admin = () => {
   const [marks, setMarks] = useState([]);
 
   useEffect(() => {
-    // Fetch marks data from db.json
-    fetch('http://localhost:5000/marks')
+    // Fetch marks data from deployed backend
+    fetch('https://json-server-backend-6y18.onrender.com/marks')
       .then((response) => response.json())
       .then((data) => setMarks(data))
       .catch((error) => console.error('Error fetching marks data:', error));
-
+  
     // Prevent default back navigation behavior
     window.history.pushState(null, "", window.location.href);
     const handlePopState = (event) => {
       event.preventDefault();
       navigate("/logout");
     };
-
+  
     window.addEventListener("popstate", handlePopState);
     return () => {
       window.removeEventListener("popstate", handlePopState);
     };
   }, [navigate]);
+  
 
   return (
     <Box sx={{ display: 'flex', minHeight: '100vh', backgroundColor: '#f8f8f8' }}>

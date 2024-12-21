@@ -5,6 +5,7 @@ import notify from "../images/notify.png";
 import logout from "../images/logout.png";
 import profile from "../images/profile.png";
 import { useNavigate } from "react-router-dom";
+const backendURL = "https://json-server-backend-6y18.onrender.com";
 
 const Tutor = () => {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ const Tutor = () => {
     }
 
     axios
-      .get(`http://localhost:5000/tutors/${loggedInTutorId}`)
+      .get(`${backendURL}/tutors/${loggedInTutorId}`)
       .then((response) => {
         setTutorData(response.data);
       })
@@ -33,7 +34,7 @@ const Tutor = () => {
 
     // Fetch feedback for this tutor
     axios
-      .get(`http://localhost:5000/feedback`)
+      .get(`${backendURL}/feedback`)
       .then((response) => {
         // Filter feedback by tutor id (assuming feedback has tutorId or similar)
         setFeedbackData(response.data.filter((item) => item.tutorId === loggedInTutorId));

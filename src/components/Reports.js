@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Reports.css";
-
+const backendURL = "https://json-server-backend-6y18.onrender.com";
+  
 const Reports = () => {
   const [reportFile, setReportFile] = useState(null);
 
@@ -10,7 +11,7 @@ const Reports = () => {
 
     if (studentId) {
       axios
-        .get(`http://localhost:5000/students/${studentId}`)
+        .get(`${backendURL}/students/${studentId}`)
         .then((response) => {
           setReportFile(response.data.reports?.file || null);
         })

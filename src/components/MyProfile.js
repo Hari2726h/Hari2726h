@@ -5,7 +5,8 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PhoneIcon from "@mui/icons-material/Phone";
 import SchoolIcon from "@mui/icons-material/School";
 import axios from "axios";
-
+ const backendURL = "https://json-server-backend-6y18.onrender.com";
+  
 const MyProfile = () => {
   const [student, setStudent] = useState(null);
   const [error, setError] = useState(null);
@@ -30,7 +31,7 @@ const MyProfile = () => {
 
     if (studentId) {
       axios
-        .get(`http://localhost:5000/students/${studentId}`)
+        .get(`${backendURL}/students/${studentId}`)
         .then((response) => {
           setStudent(response.data);
           setUpdatedStudent(response.data);  // Set initial state for editing
@@ -67,7 +68,7 @@ const MyProfile = () => {
     const studentId = localStorage.getItem("loggedInStudentId");
 
     axios
-      .put(`http://localhost:5000/students/${studentId}`, updatedStudent)
+      .put(`${backendURL}/students/${studentId}`, updatedStudent)
       .then((response) => {
         setStudent(updatedStudent); // Update UI with the updated data
         setIsEditing(false); // Exit editing mode

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+const backendURL = "https://json-server-backend-6y18.onrender.com";
 
 const Students = () => {
   const [students, setStudents] = useState([]);
@@ -7,7 +8,7 @@ const Students = () => {
   const [editStudent, setEditStudent] = useState(null);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/students").then((response) => {
+    axios.get(`${backendURL}/students`).then((response) => {
       setStudents(response.data);
     });
   }, []);
@@ -25,7 +26,7 @@ const Students = () => {
       return;
     }
 
-    axios.post("http://localhost:5000/students", newStudent).then((response) => {
+    axios.post(`${backendURL}/students`, newStudent).then((response) => {
       setStudents([...students, response.data]);
       setNewStudent({ name: "", class: "", contact: "" });
     });
@@ -33,7 +34,7 @@ const Students = () => {
 
   // Edit student details
   const handleEditStudent = () => {
-    axios.put(`http://localhost:5000/students/${editStudent.id}`, editStudent).then((response) => {
+    axios.put(` ${backendURL}/students/${editStudent.id}`, editStudent).then((response) => {
       setStudents(
         students.map((student) =>
           student.id === response.data.id ? response.data : student
@@ -45,7 +46,7 @@ const Students = () => {
 
   // Delete a student
   const handleDeleteStudent = (id) => {
-    axios.delete(`http://localhost:5000/students/${id}`).then(() => {
+    axios.delete(` ${backendURL}/students/${id}`).then(() => {
       setStudents(students.filter((student) => student.id !== id));
     });
   };
