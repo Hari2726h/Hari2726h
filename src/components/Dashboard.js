@@ -63,11 +63,11 @@ const Dashboard = () => {
             <img src={edu} alt="Academics Icon" className="sidebar-icon" />
             Academics
           </li>
-          <li onClick={() => navigate("/achievements")} className="sidebar-item">
+          <li onClick={() => navigate("/programs")} className="sidebar-item">
             <img src={achi} alt="Achievements Icon" className="sidebar-icon" />
-            Achievements
+            Our Programs
           </li>
-          <li onClick={() => navigate("/timetable")} className="sidebar-item">
+          <li onClick={() => navigate("/up")} className="sidebar-item">
             <img src={time} alt="Timetable Icon" className="sidebar-icon" />
             Timetable
           </li>

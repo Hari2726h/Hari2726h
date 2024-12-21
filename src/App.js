@@ -23,6 +23,9 @@ import Admin1 from "./components/Admin1";
 import Tprofile from "./components/Tprofile";
 import NotificationPage from "./components/NotificationPage";
 import FeedbackPage from "./components/FeedbackPage";
+import UpcomingMeetings from "./components/UpcomingMeetings";
+import Program from "./components/Program";
+// import programs 
 const App = () => {
   return (
     <Router>
@@ -37,8 +40,11 @@ const App = () => {
 
         {/* Login Route */}
         <Route path="/login" element={<Login />} />
+        <Route path="/programs" element={<Program />} />
+
         <Route path="/tp" element={<Tprofile />} />
         <Route path="/admin1" element={<Admin1 />} />
+        <Route path="/up" element={<UpcomingMeetings />} />
         {/* Dashboard Route */}
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/academics" element={<Academics />} />

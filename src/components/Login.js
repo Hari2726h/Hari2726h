@@ -5,13 +5,14 @@ import "./Login.css";
 import Ll from '../images/Ll.png';
 import oip from '../images/OIP.jpg';
 
+const backendURL = "https://json-server-backend-6y18.onrender.com";
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
   const { role } = location.state || {};
-  axios.defaults.baseURL = 'https://your-backend.cyclic.app';
 
   useEffect(() => {
     // Block back navigation and redirect to logout page
@@ -33,14 +34,14 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const endpoint = role === "student" ? "students" : role === "tutor" ? "tutors" : "users";
-    const apiUrl = `http://localhost:5000/${endpoint}`;
-  
+    const apiUrl = `${backendURL}/${endpoint}`;
+
     try {
       const response = await axios.get(apiUrl);
       const validUser = response.data.find(
         (user) => user.email === email && user.password === password
       );
-  
+
       if (validUser) {
         if (role === "student") {
           localStorage.setItem("loggedInStudentId", validUser.id);
@@ -59,9 +60,6 @@ const Login = () => {
       alert("An error occurred during login.");
     }
   };
-  
-  
-  
 
   return (
     <div className="login-page">
@@ -106,4 +104,4 @@ const Login = () => {
   );
 };
 
-export default Login;  
+export default Login;
