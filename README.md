@@ -5,7 +5,7 @@
 
 <p align="left"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=hari2726h" alt="hari2726h" /></a> </p>
 
-- 🔭 I’m currently working on [Full Stack E-commerce Platform](https://github.com/Hari2726h/E-commerce-Platform.git)
+- 🔭 I’m currently working on [Intelligent Scholarship recommendation and management Platform](https://github.com/Hari2726h/Scholarship_Management)
 
 - 🌱 I’m currently learning **Data Structure and Algorithms on Java**
 
@@ -13,7 +13,7 @@
 
 - 👨‍💻 All of my projects are available at [https://github.com/Hari2726h](https://github.com/Hari2726h)
 
-- 📝 I regularly write articles on [https://hari2726h.wixsite.com/professional-on](https://hari2726h.wixsite.com/professional-on)
+- 📝 I regularly write articles on [https://www.linkedin.com/in/hariharan-c-8918b92a2/](https://www.linkedin.com/in/hariharan-c-8918b92a2/)
 
 - 💬 Ask me about **Java Problems**
 
